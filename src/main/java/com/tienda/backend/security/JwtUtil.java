@@ -15,7 +15,6 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    // Leemos la clave secreta del application.properties
     @Value("${jwt.secret}")
     private String secret;
 
@@ -26,19 +25,18 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    // 1. GENERAR TOKEN
     public String generateToken(String email, String role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role); // Guardamos el rol dentro del token
+        claims.put("role", role); 
         return createToken(claims, email);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject) // El email va aquí
+                .setSubject(subject) 
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration)) // Expira en 24h
+                .setExpiration(new Date(System.currentTimeMillis() + expiration)) 
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

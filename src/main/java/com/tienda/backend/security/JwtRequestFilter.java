@@ -30,7 +30,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String email = null;
         String jwt = null;
 
-        // 1. Buscamos el token en la cabecera "Authorization: Bearer <token>"
+    
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             try {
@@ -40,20 +40,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
 
-        // 2. Si hay email pero no está autenticado en el contexto...
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             
-            // Validamos el token
+
             if (jwtUtil.validateToken(jwt, email)) {
                 String role = jwtUtil.extractRole(jwt);
-                
-                // Creamos la autenticación oficial de Spring Security
+        
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         email, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
                 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 
-                // ¡Usuario autenticado con éxito para esta petición!
+    
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }

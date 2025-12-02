@@ -17,10 +17,9 @@ public class HuertohogarBackendApplication {
     @Bean
     public CommandLineRunner demo(ProductoRepository repository) {
         return (args) -> {
-            // Solo insertar si la tabla está vacía
             if(repository.count() == 0) {
                 
-                // Producto 1
+            
                 Producto p1 = new Producto();
                 p1.setName("Manzanas Fuji");       
                 p1.setPrice(1200);                
@@ -29,7 +28,6 @@ public class HuertohogarBackendApplication {
                 p1.setCategory("Frutas");         
                 repository.save(p1);
 
-                // Producto 2
                 Producto p2 = new Producto();
                 p2.setName("Naranjas Valencia");
                 p2.setPrice(1000);
@@ -38,7 +36,6 @@ public class HuertohogarBackendApplication {
                 p2.setCategory("Frutas");
                 repository.save(p2);
 
-                // Producto 3
                 Producto p3 = new Producto();
                 p3.setName("Plátanos Cavendish");
                 p3.setPrice(800);
@@ -47,7 +44,7 @@ public class HuertohogarBackendApplication {
                 p3.setCategory("Frutas");
                 repository.save(p3);
 
-                // Producto 4
+               
                 Producto p4 = new Producto();
                 p4.setName("Zanahorias Orgánicas");
                 p4.setPrice(900);
@@ -56,7 +53,7 @@ public class HuertohogarBackendApplication {
                 p4.setCategory("Verduras");
                 repository.save(p4);
 
-                // Producto 5
+        
                 Producto p5 = new Producto();
                 p5.setName("Espinacas Frescas");
                 p5.setPrice(700);
@@ -65,7 +62,7 @@ public class HuertohogarBackendApplication {
                 p5.setCategory("Verduras");
                 repository.save(p5);
 
-                // Producto 6
+
                 Producto p6 = new Producto();
                 p6.setName("Pimientos Tricolores");
                 p6.setPrice(1500);
@@ -74,7 +71,7 @@ public class HuertohogarBackendApplication {
                 p6.setCategory("Verduras");
                 repository.save(p6);
 
-                System.out.println(">>> ¡TUS 6 PRODUCTOS HAN SIDO CARGADOS! <<<");
+                System.out.println(">>> ¡Los productos han sido cargados! <<<");
             }
         };
     }
